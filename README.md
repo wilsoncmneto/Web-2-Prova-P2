@@ -1,270 +1,390 @@
-# API REST para Gerenciamento de Produtos e Usuários
+# API Projeto P1
 
-Este projeto consiste no desenvolvimento de uma API REST para gerenciamento de usuários, produtos, categorias e situações. A aplicação foi desenvolvida com Node.js, Express, TypeScript e Sequelize, permitindo a utilização dos bancos de dados MySQL ou PostgreSQL.
+API REST desenvolvida com Node.js, Express e Sequelize. O projeto permite usar MySQL ou PostgreSQL por meio da variavel `DB_DIALECT`.
 
-O objetivo do projeto é demonstrar a construção de um back-end organizado, com operações de cadastro, consulta, atualização e exclusão de dados, além de autenticação de usuários, validação de informações, recuperação de senha e controle de acesso a rotas restritas.
+Esta versao continua o projeto antigo e inclui as implementacoes das aulas 11 e 12, com validacoes de formularios, validacoes de duplicidade e ajustes no banco de dados para aproximar a API do diagrama do projeto final.
 
-## Funcionalidades
+## Tecnologias
 
-**Gerenciamento de usuários:** permite cadastrar, listar, consultar, atualizar e excluir usuários.
+- Node.js
+- Express
+- Sequelize ORM
+- MySQL ou PostgreSQL
+- dotenv
+- Yup
+- CORS
+- Nodemon
 
-**Gerenciamento de produtos:** disponibiliza operações completas de cadastro, consulta, atualização e exclusão de produtos.
+## Estrutura
 
-**Gerenciamento de categorias:** permite organizar os produtos por diferentes categorias.
+```text
+src/
+|-- config/        # Configuracao do banco de dados
+|-- controllers/   # Rotas e entrada das requisicoes
+|-- entities/      # Entidades do dominio
+|-- middlewares/   # Middlewares da aplicacao
+|-- migrations/    # Criacao e alteracao das tabelas
+|-- models/        # Models do Sequelize
+|-- seeders/       # Dados iniciais
+|-- services/      # Regras de negocio
+|-- utils/         # Utilitarios e validacoes
+|-- app.js         # Configuracao do Express
+`-- server.js      # Inicializacao do servidor
+```
 
-**Gerenciamento de situações:** controla as situações relacionadas aos usuários, como ativo ou inativo.
+## Requisitos
 
-**Gerenciamento de situações de produtos:** permite definir o estado de cada produto dentro do sistema.
+- Node.js instalado
+- MySQL ou PostgreSQL instalado
+- Banco de dados criado ou permissao para criar banco via Sequelize CLI
 
-**Autenticação de usuários:** possibilita realizar login utilizando e-mail e senha.
+## Instalacao
 
-**Proteção de rotas:** utiliza token de autenticação para controlar o acesso às rotas restritas da aplicação.
-
-**Criptografia de senhas:** as senhas dos usuários são armazenadas de forma protegida no banco de dados.
-
-**Recuperação de senha:** permite gerar uma chave de recuperação, enviar um e-mail ao usuário e cadastrar uma nova senha.
-
-**Validação de dados:** verifica campos obrigatórios, formato de e-mail, tamanho da senha, valores numéricos e outros dados recebidos pela API.
-
-**Validação de duplicidade:** impede o cadastro de usuários com o mesmo e-mail, produtos com o mesmo slug e categorias ou situações duplicadas.
-
-**Geração automática de slug:** cria automaticamente um identificador amigável para cada produto com base em seu nome.
-
-**Paginação de resultados:** as rotas de listagem permitem controlar a página e a quantidade de registros retornados.
-
-**Integração com o front-end:** possui configuração de CORS e uma rota específica para testar a comunicação entre o front-end e a API.
-
-**Suporte a diferentes bancos de dados:** o projeto pode ser configurado para funcionar com MySQL ou PostgreSQL.
-
-## Tecnologias Utilizadas
-
-* Node.js;
-* Express;
-* TypeScript;
-* Sequelize ORM;
-* MySQL;
-* PostgreSQL;
-* Yup;
-* CORS;
-* Nodemailer;
-* dotenv;
-* Nodemon.
-
-## Estrutura do Projeto
-
-`/src/config`: contém as configurações de conexão com o banco de dados.
-
-`/src/controllers`: contém as rotas da API e o tratamento das requisições HTTP.
-
-`/src/entities`: contém as entidades utilizadas para representar os dados do sistema.
-
-`/src/middlewares`: contém os intermediários responsáveis pela autenticação e pelo tratamento de erros.
-
-`/src/migrations`: contém os arquivos responsáveis pela criação e alteração das tabelas do banco de dados.
-
-`/src/models`: contém os modelos do Sequelize e os relacionamentos entre as tabelas.
-
-`/src/seeders`: contém os dados iniciais utilizados para preencher o banco de dados.
-
-`/src/services`: contém as regras de negócio, paginação, envio de e-mails e demais serviços da aplicação.
-
-`/src/utils`: contém funções auxiliares de validação, geração de slug, criptografia de senha e autenticação.
-
-`src/app.ts`: configura o Express, os middlewares e as rotas da aplicação.
-
-`src/server.ts`: inicia o servidor da API.
-
-`.env`: contém as configurações do ambiente, banco de dados, autenticação e servidor de e-mail.
-
-## Como Executar o Projeto
-
-Antes de iniciar, certifique-se de que o Node.js e um dos bancos de dados compatíveis, MySQL ou PostgreSQL, estejam instalados no computador.
-
-### 1. Instale as dependências
+Instale as dependencias:
 
 ```bash
 npm install
 ```
 
-### 2. Configure as variáveis de ambiente
+Crie o arquivo `.env` a partir de um dos exemplos:
 
-Crie ou edite o arquivo `.env` na pasta principal do projeto.
-
-Exemplo de configuração para PostgreSQL:
-
-```env
-APP_NAME=API_P1
-PORT=3000
-NODE_ENV=development
-
-DB_DIALECT=postgres
-DB_HOST=localhost
-DB_PORT=5432
-DB_NAME=api_p1
-DB_USER=postgres
-DB_PASSWORD=sua_senha
-
-AUTH_TOKEN_SECRET=sua_chave_secreta
+```bash
+copy .env.example .env
 ```
 
-Exemplo de configuração para MySQL:
+Para MySQL, use:
 
 ```env
-APP_NAME=API_P1
-PORT=3000
-NODE_ENV=development
-
 DB_DIALECT=mysql
 DB_HOST=localhost
 DB_PORT=3306
 DB_NAME=api_p1
 DB_USER=root
-DB_PASSWORD=sua_senha
-
-AUTH_TOKEN_SECRET=sua_chave_secreta
+DB_PASSWORD=sua_senha_do_mysql
+PORT=3000
+NODE_ENV=development
 ```
 
-### 3. Crie o banco de dados
+Para PostgreSQL, use:
+
+```env
+DB_DIALECT=postgres
+DB_HOST=localhost
+DB_PORT=5432
+DB_NAME=api_p1
+DB_USER=postgres
+DB_PASSWORD=sua_senha_do_postgres
+PORT=3000
+NODE_ENV=development
+```
+
+## Banco de Dados
+
+Crie o banco configurado em `DB_NAME`:
 
 ```bash
 npm run db:create
 ```
 
-### 4. Execute as migrations
+Execute as migrations:
 
 ```bash
 npm run migrate
 ```
 
-### 5. Execute os seeders
+Execute os seeders:
 
 ```bash
 npm run seed
 ```
 
-### 6. Inicie o servidor de desenvolvimento
+Para desfazer migrations ou seeders:
+
+```bash
+npm run migrate:undo
+npm run seed:undo
+```
+
+Para recriar tudo do zero:
+
+```bash
+npm run seed:undo
+npm run migrate:undo
+npm run migrate
+npm run seed
+```
+
+## Alteracoes das Aulas 11 e 12
+
+### Banco de dados conforme o diagrama
+
+Foram adicionadas duas migrations:
+
+- `20240101000006-alter-users-add-password-recover-password.js`
+- `20240101000007-alter-products-add-slug-description-price.js`
+
+Essas migrations adicionam os campos abaixo.
+
+Tabela `users`:
+
+- `password`
+- `recoverPassword`
+
+Tabela `products`:
+
+- `slug`
+- `description`
+- `price`
+
+### Models atualizados
+
+Foram atualizados:
+
+- `src/models/User.js`
+- `src/models/Product.js`
+
+### Validacao de formularios
+
+Foram adicionadas validacoes em:
+
+- Usuarios
+- Produtos
+- Categorias
+- Situacoes
+- Situacoes de produto
+
+Exemplos de validacao:
+
+- Campo obrigatorio
+- E-mail valido
+- Senha com no minimo 6 caracteres
+- Preco maior que zero
+- IDs numericos validos
+
+### Validacao de duplicidade
+
+Foram adicionadas validacoes para impedir:
+
+- Usuario com e-mail duplicado
+- Categoria duplicada
+- Situacao duplicada
+- Situacao de produto duplicada
+- Produto com slug duplicado
+
+### Arquivos utilitarios criados
+
+- `src/utils/validation.js`
+- `src/utils/slugify.js`
+
+## Executando
+
+Ambiente de desenvolvimento:
 
 ```bash
 npm run dev
 ```
 
-Para executar a versão compilada do projeto, utilize:
+Ambiente normal:
 
 ```bash
-npm run build
 npm start
 ```
 
-### 7. Acesse a API
-
-Após iniciar o servidor, a API estará disponível no endereço:
+Por padrao, a API roda em:
 
 ```text
 http://localhost:3000
 ```
 
-Para verificar se a aplicação está funcionando, acesse:
-
-```text
-http://localhost:3000
-```
-
-A resposta esperada será:
-
-```json
-{
-  "message": "API Projeto P1 - Funcionando"
-}
-```
-
-## Principais Rotas
-
-### Autenticação
+Rota inicial:
 
 ```http
-POST /api/login
-POST /api/recuperar-senha
-POST /api/validar-recuperar-senha
-PUT /api/atualizar-senha
-GET /api/validar-token
-GET /api/rota-restrita
+GET /
 ```
 
-### Usuários
+## Scripts
 
-```http
-POST /api/novo-usuario
-GET /api/usuarios
-GET /api/usuarios/:id
-POST /api/usuarios
-PUT /api/usuarios/:id
-DELETE /api/usuarios/:id
-```
+| Script | Descricao |
+| --- | --- |
+| `npm start` | Inicia a API com Node |
+| `npm run dev` | Inicia a API com Nodemon |
+| `npm run db:create` | Cria o banco configurado |
+| `npm run db:drop` | Remove o banco configurado |
+| `npm run migrate` | Executa as migrations |
+| `npm run migrate:undo` | Desfaz todas as migrations |
+| `npm run seed` | Executa os seeders |
+| `npm run seed:undo` | Desfaz todos os seeders |
+
+## Rotas
+
+Todas as rotas principais usam o prefixo `/api`.
+
+### Usuarios
+
+| Metodo | Rota | Descricao |
+| --- | --- | --- |
+| GET | `/api/usuarios` | Lista usuarios |
+| GET | `/api/usuarios/:id` | Busca usuario por ID |
+| POST | `/api/usuarios` | Cria usuario |
+| PUT | `/api/usuarios/:id` | Atualiza usuario |
+| DELETE | `/api/usuarios/:id` | Remove usuario |
 
 ### Produtos
 
-```http
-GET /api/produtos
-GET /api/produtos/:id
-POST /api/produtos
-PUT /api/produtos/:id
-DELETE /api/produtos/:id
-```
+| Metodo | Rota | Descricao |
+| --- | --- | --- |
+| GET | `/api/produtos` | Lista produtos |
+| GET | `/api/produtos/:id` | Busca produto por ID |
+| POST | `/api/produtos` | Cria produto |
+| PUT | `/api/produtos/:id` | Atualiza produto |
+| DELETE | `/api/produtos/:id` | Remove produto |
 
 ### Categorias
 
-```http
-GET /api/categorias
-GET /api/categorias/:id
-POST /api/categorias
-PUT /api/categorias/:id
-DELETE /api/categorias/:id
-```
+| Metodo | Rota | Descricao |
+| --- | --- | --- |
+| GET | `/api/categorias` | Lista categorias |
+| GET | `/api/categorias/:id` | Busca categoria por ID |
+| POST | `/api/categorias` | Cria categoria |
+| PUT | `/api/categorias/:id` | Atualiza categoria |
+| DELETE | `/api/categorias/:id` | Remove categoria |
 
-### Situações
+### Situacoes
 
-```http
-GET /api/situacoes
-GET /api/situacoes/:id
-POST /api/situacoes
-PUT /api/situacoes/:id
-DELETE /api/situacoes/:id
-```
+| Metodo | Rota | Descricao |
+| --- | --- | --- |
+| GET | `/api/situacoes` | Lista situacoes |
+| GET | `/api/situacoes/:id` | Busca situacao por ID |
+| POST | `/api/situacoes` | Cria situacao |
+| PUT | `/api/situacoes/:id` | Atualiza situacao |
+| DELETE | `/api/situacoes/:id` | Remove situacao |
 
-### Situações de produtos
+### Situacoes de Produto
 
-```http
-GET /api/situacoes-produto
-GET /api/situacoes-produto/:id
-POST /api/situacoes-produto
-PUT /api/situacoes-produto/:id
-DELETE /api/situacoes-produto/:id
-```
+| Metodo | Rota | Descricao |
+| --- | --- | --- |
+| GET | `/api/situacoes-produto` | Lista situacoes de produto |
+| GET | `/api/situacoes-produto/:id` | Busca situacao de produto por ID |
+| POST | `/api/situacoes-produto` | Cria situacao de produto |
+| PUT | `/api/situacoes-produto/:id` | Atualiza situacao de produto |
+| DELETE | `/api/situacoes-produto/:id` | Remove situacao de produto |
 
-### Teste de integração com o front-end
+### Teste para Front-End
 
-```http
-GET /api/teste-frontend
-```
+| Metodo | Rota | Descricao |
+| --- | --- | --- |
+| GET | `/api/teste-frontend` | Testa a conexao entre front-end e API |
 
-## Paginação
+## Paginacao
 
-As rotas de listagem permitem utilizar os parâmetros `page` e `limit`.
-
-Exemplo:
+As rotas de listagem aceitam os parametros `page` e `limit`:
 
 ```http
 GET /api/produtos?page=1&limit=10
 ```
 
-Essa requisição retorna a primeira página com até dez produtos, além de informações como total de registros, número de páginas e disponibilidade das páginas anterior e seguinte.
+Formato da resposta:
 
-## Testes da API
-
-As rotas podem ser testadas utilizando o Postman. O projeto possui o arquivo:
-
-```text
-API_Projeto_P1_Postman_Collection.json
+```json
+{
+  "data": [],
+  "pagination": {
+    "total": 0,
+    "page": 1,
+    "limit": 10,
+    "totalPages": 0,
+    "hasNext": false,
+    "hasPrev": false
+  }
+}
 ```
 
-Esse arquivo pode ser importado no Postman para testar as rotas de autenticação, usuários, produtos, categorias, situações e rotas restritas.
+## Exemplos de Requisicao
+
+Criar usuario:
+
+```json
+{
+  "name": "Wilson Neto",
+  "email": "wilson@email.com",
+  "password": "123456",
+  "situationId": 1
+}
+```
+
+Criar produto:
+
+```json
+{
+  "name": "Mouse Gamer",
+  "description": "Mouse gamer com iluminacao RGB.",
+  "price": 149.9,
+  "productSituationId": 1,
+  "productCategoryId": 1
+}
+```
+
+Criar usuario com erro de validacao:
+
+```json
+{
+  "name": "",
+  "email": "email-invalido",
+  "password": "123",
+  "situationId": "abc"
+}
+```
+
+Criar produto com slug manual:
+
+```json
+{
+  "name": "Teclado Mecanico",
+  "slug": "teclado-mecanico",
+  "description": "Teclado mecanico para jogos e programacao.",
+  "price": 299.9,
+  "productSituationId": 1,
+  "productCategoryId": 1
+}
+```
+
+Criar categoria, situacao ou situacao de produto:
+
+```json
+{
+  "name": "Ativo"
+}
+```
+
+## Validacoes
+
+A API usa Yup para validar os dados recebidos nas rotas de criacao e atualizacao. Tambem possui validacoes para:
+
+- Campos obrigatorios
+- E-mail valido
+- Preco valido
+- IDs numericos
+- Duplicidade de e-mail, slug, categoria e situacao
+- Existencia de relacionamentos antes de criar ou atualizar registros
+
+## CORS
+
+O CORS esta habilitado globalmente em `src/app.js` com `app.use(cors())`, permitindo que o front-end faca requisicoes para a API.
+
+## Observacoes
+
+- O campo `slug` do produto pode ser enviado manualmente. Se nao for enviado, sera gerado a partir do `name`.
+- As senhas ainda sao salvas sem criptografia nesta etapa do projeto.
+- Os dados sensiveis `password` e `recoverPassword` nao sao retornados nas consultas de usuarios.
+
+## Proximos Passos
+
+O proximo passo e a Aula 13: requisicao externa, CORS e rota de teste para frontend.
+
+Depois seguem:
+
+- Aula 14: CRUD de Users
+- Aula 15: Alter table com Migration
+- Aula 16: Criptografia de senha
+- Aula 17: Login
+- Aula 18: Rota restrita e validacao de token
