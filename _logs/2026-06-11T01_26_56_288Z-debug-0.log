@@ -1,0 +1,43 @@
+0 verbose cli D:\Node.js\node.exe D:\Node.js\node_modules\npm\bin\npm-cli.js
+1 info using npm@10.9.2
+2 info using node@v22.16.0
+3 silly config load:file:D:\Node.js\node_modules\npm\npmrc
+4 silly config load:file:C:\Projeto baião\Projeto P2\api-projeto-p1-aula-11-12-mysql-postgres\api-projeto-p1-aula-11-12-postgres\.npmrc
+5 silly config load:file:C:\Users\wilso\.npmrc
+6 silly config load:file:C:\Users\wilso\AppData\Roaming\npm\etc\npmrc
+7 verbose title npm install typescript ts-node
+8 verbose argv "install" "--save-dev" "typescript" "ts-node" "--cache" ".npm-cache"
+9 verbose logfile logs-max:10 dir:C:\Projeto baião\Projeto P2\api-projeto-p1-aula-11-12-mysql-postgres\api-projeto-p1-aula-11-12-postgres\.npm-cache\_logs\2026-06-11T01_26_56_288Z-
+10 verbose logfile C:\Projeto baião\Projeto P2\api-projeto-p1-aula-11-12-mysql-postgres\api-projeto-p1-aula-11-12-postgres\.npm-cache\_logs\2026-06-11T01_26_56_288Z-debug-0.log
+11 silly logfile done cleaning log files
+12 http fetch GET https://registry.npmjs.org/npm attempt 1 failed with ECONNREFUSED
+13 silly packumentCache heap:4345298944 maxSize:1086324736 maxEntrySize:543162368
+14 silly idealTree buildDeps
+15 silly fetch manifest typescript@*
+16 silly packumentCache full:https://registry.npmjs.org/typescript cache-miss
+17 silly fetch manifest ts-node@*
+18 silly packumentCache full:https://registry.npmjs.org/ts-node cache-miss
+19 silly placeDep ROOT ts-node@ OK for: api-projeto-p1@1.0.0 want: *
+20 silly placeDep ROOT typescript@ OK for: api-projeto-p1@1.0.0 want: *
+21 verbose stack Error: request to https://registry.npmjs.org/ts-node failed: cache mode is 'only-if-cached' but no cached response is available.
+21 verbose stack     at cacheFetch (D:\Node.js\node_modules\npm\node_modules\make-fetch-happen\lib\cache\index.js:12:13)
+21 verbose stack     at async fetch (D:\Node.js\node_modules\npm\node_modules\make-fetch-happen\lib\fetch.js:98:7)
+21 verbose stack     at async RegistryFetcher.packument (D:\Node.js\node_modules\npm\node_modules\pacote\lib\registry.js:90:19)
+21 verbose stack     at async RegistryFetcher.manifest (D:\Node.js\node_modules\npm\node_modules\pacote\lib\registry.js:128:23)
+21 verbose stack     at async #fetchManifest (D:\Node.js\node_modules\npm\node_modules\@npmcli\arborist\lib\arborist\build-ideal-tree.js:1202:20)
+21 verbose stack     at async #nodeFromEdge (D:\Node.js\node_modules\npm\node_modules\@npmcli\arborist\lib\arborist\build-ideal-tree.js:1040:19)
+21 verbose stack     at async #buildDepStep (D:\Node.js\node_modules\npm\node_modules\@npmcli\arborist\lib\arborist\build-ideal-tree.js:904:11)
+21 verbose stack     at async Arborist.buildIdealTree (D:\Node.js\node_modules\npm\node_modules\@npmcli\arborist\lib\arborist\build-ideal-tree.js:181:7)
+21 verbose stack     at async Promise.all (index 1)
+21 verbose stack     at async Arborist.reify (D:\Node.js\node_modules\npm\node_modules\@npmcli\arborist\lib\arborist\reify.js:131:5)
+22 error code ENOTCACHED
+23 error request to https://registry.npmjs.org/ts-node failed: cache mode is 'only-if-cached' but no cached response is available.
+24 silly unfinished npm timer reify 1781141218168
+25 silly unfinished npm timer reify:loadTrees 1781141218170
+26 verbose cwd C:\Projeto baião\Projeto P2\api-projeto-p1-aula-11-12-mysql-postgres\api-projeto-p1-aula-11-12-postgres
+27 verbose os Windows_NT 10.0.26200
+28 verbose node v22.16.0
+29 verbose npm  v10.9.2
+30 verbose exit 1
+31 verbose code 1
+32 error A complete log of this run can be found in: C:\Projeto baião\Projeto P2\api-projeto-p1-aula-11-12-mysql-postgres\api-projeto-p1-aula-11-12-postgres\.npm-cache\_logs\2026-06-11T01_26_56_288Z-debug-0.log
